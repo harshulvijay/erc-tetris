@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    "*.rst": "rust",
+    "color.h": "c",
+    "stdbool.h": "c",
+    "graphics.h": "c",
+    "game.h": "c"
+  }
+}
