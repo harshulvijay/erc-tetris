@@ -20,7 +20,7 @@ void clear_display_with_color(Display *display, Color color)
 
 void update_pixel(Display *display, uint x, uint y, Color new_color)
 {
-  if ((y >= 0 && y <= MAX_ROWS) && (x >= 0 && x <= MAX_COLS))
+  if ((y >= 0 && y < MAX_COLS) && (x >= 0 && x < MAX_ROWS))
   {
     display->data[y][x] = new_color;
   }
