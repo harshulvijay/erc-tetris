@@ -6,8 +6,6 @@ int main(int argc, char **argv)
 {
   Display display = {0};
 
-  clear_display_with_color(&display, use_color(255, 0, 0));
-
   // Create AppData structure to hold both display and drawing area
   AppData app_data = {&display, NULL};
 

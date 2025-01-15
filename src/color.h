@@ -17,8 +17,4 @@ struct Color
 
 Color use_color(uint8 r, uint8 g, uint8 b);
 
-void print_matrix_to_file(const char *filename, int rows, int cols, Color matrix[rows][cols]);
-
-
-
 #endif

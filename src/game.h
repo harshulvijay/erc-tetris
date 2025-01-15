@@ -5,6 +5,6 @@
 #include "util.h"
 #include <stdio.h>
 
-void wooo(Display *display);
+void game_tick(Display *display);
 
 #endif

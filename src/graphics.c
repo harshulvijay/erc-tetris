@@ -1,20 +1,14 @@
 #include "graphics.h"
 
-void update_graphics(int frame_number, Display *display)
+void update_graphics(Display *display, FrameMetadata *frame_metadata)
 {
-  // Logic for updating the game state or drawing a frame
-  printf("Rendering frame %d\n", frame_number);
-  // Color color = get_pixel(display, 0, 0);
-
-    // Update the display logic (e.g., game tick logic)
-  for (int row = 0; row < MAX_ROWS; ++row)
+  // NULL check
+  if (!frame_metadata)
   {
-    for (int col = 0; col < MAX_COLS; ++col)
-    {
-      Color color = {rand() % 256, rand() % 256, rand() % 256};
-      update_pixel(display, col, row, color);
-    }
+    // todo
   }
+
+  game_tick(display);
 }
 
 uint64_t get_current_time_ms()
@@ -48,7 +42,11 @@ void init_graphics_loop(Display *display)
     // Render each frame up to the current time
     while (frame_number < frames_to_process)
     {
-      update_graphics(frame_number, display);
+      FrameMetadata frame_metadata = {
+          frame_number,
+      };
+
+      update_graphics(display, &frame_metadata);
       frame_number++;
     }
 

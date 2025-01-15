@@ -12,8 +12,8 @@
 void wait(int time_in_ms)
 {
 #ifdef _WIN32
-    Sleep(time_in_ms); // Sleep for 1 ms on Windows
+  Sleep(time_in_ms);
 #else
-    usleep(time_in_ms); // Sleep for 1 ms on Linux
+  usleep(time_in_ms);
 #endif
 }

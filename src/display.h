@@ -19,6 +19,4 @@ Color get_pixel(Display *display, uint x, uint y);
 
 void update_pixel(Display *display, uint x, uint y, Color new_color);
 
-Display *create_display();
-
 #endif
