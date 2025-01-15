@@ -9,24 +9,24 @@ void clear_display(Display *display)
 
 void clear_display_with_color(Display *display, Color color)
 {
-  for (uint y = 0; y < MAX_ROWS; y++)
+  for (uint row = 0; row < MAX_ROWS; row++)
   {
-    for (uint x = 0; x < MAX_COLS; x++)
+    for (uint col = 0; col < MAX_COLS; col++)
     {
-      update_pixel(display, x, y, color);
+      update_pixel(display, row, col, color);
     }
   }
 }
 
-void update_pixel(Display *display, uint x, uint y, Color new_color)
+void update_pixel(Display *display, uint row, uint col, Color new_color)
 {
-  if ((y >= 0 && y < MAX_COLS) && (x >= 0 && x < MAX_ROWS))
+  if ((col >= 0 && col < MAX_COLS) && (row >= 0 && row < MAX_ROWS))
   {
-    display->data[y][x] = new_color;
+    display->data[row][col] = new_color;
   }
 }
 
-Color get_pixel(Display *display, uint x, uint y)
+Color get_pixel(Display *display, uint row, uint col)
 {
-  return display->data[y][x];
+  return display->data[row][col];
 }

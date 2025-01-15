@@ -15,8 +15,8 @@ struct Display
 void clear_display(Display *display);
 void clear_display_with_color(Display *display, Color color);
 
-Color get_pixel(Display *display, uint x, uint y);
+Color get_pixel(Display *display, uint row, uint col);
 
-void update_pixel(Display *display, uint x, uint y, Color new_color);
+void update_pixel(Display *display, uint row, uint col, Color new_color);
 
 #endif

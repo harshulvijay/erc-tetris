@@ -32,7 +32,7 @@ void on_draw(GtkDrawingArea *drawing_area, cairo_t *cr, int width, int height, g
   {
     for (int col = 0; col < MAX_COLS; ++col)
     {
-      Color color = app_data->display->data[row][col];
+      Color color = get_pixel(app_data->display, row, col);
 
       cairo_set_source_rgb(cr, color.r / 255.0, color.g / 255.0, color.b / 255.0);
       cairo_rectangle(cr, col * cell_width, row * cell_height, cell_width, cell_height);
