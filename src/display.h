@@ -4,8 +4,8 @@
 #include "color.h"
 #include "util.h"
 
-#define MAX_ROWS 20
-#define MAX_COLS 40
+#define MAX_ROWS 40
+#define MAX_COLS 20
 
 struct Display
 {

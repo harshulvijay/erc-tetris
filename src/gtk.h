@@ -1,7 +1,7 @@
 #ifndef GTK_UTILS
 #define GTK_UTILS
 
-#define CELL_SIZE 40
+#define CELL_SIZE 20
 
 #include "graphics.h"
 
