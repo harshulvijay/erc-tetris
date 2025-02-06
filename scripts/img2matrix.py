@@ -1,4 +1,5 @@
 # converts an image of `WxH` pIxels into a matrix of dimensions `WxH`
+# usage: python img2matrix.py <INPUT FILE/DIRECTORY> <OUTPUT FILE> <PATH TO "color.h">
 
 from operator import attrgetter
 from pathlib import Path
@@ -11,6 +12,9 @@ DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 # user input
 INPUT_FILE = sys.argv[1]
 OUTPUT_FILE = sys.argv[2]
+OUTPUT_FILE_PATH = Path(sys.argv[2])
+COLOR_H_IMPORT_PATH = Path(os.path.relpath(
+    sys.argv[3], start=OUTPUT_FILE_PATH.parent))
 OUTPUT_FILE_NAME = os.path.basename(OUTPUT_FILE).split(".")[0]
 
 
@@ -40,8 +44,7 @@ def read_image_with_8_bit_colors(image_path):
 
         for x in range(width):
             pixel = image.getpixel((x, y))
-            color = rgba_to_8_bit_color(pixel)
-            row.append(color)
+            row.append(pixel)
 
         output_matrix.append(row)
 
@@ -50,7 +53,7 @@ def read_image_with_8_bit_colors(image_path):
 
 def write_header_file(input_matrix, height, width):
     include_once_name = OUTPUT_FILE_NAME.upper()
-    include_once_name_h = f"{include_once_name}_H"
+    include_once_name_h = f"{include_once_name}_HEADER"
 
     with open(f"{os.path.dirname(OUTPUT_FILE)}/{OUTPUT_FILE_NAME}.h", "w") as file:
         if os.path.isdir(OUTPUT_FILE) or True:
@@ -59,13 +62,23 @@ def write_header_file(input_matrix, height, width):
             file.write(f"#define {include_once_name_h}\n")
             file.write("\n")
 
+        file.write(f"#include <stdbool.h>\n")
+        file.write(f"#include \"{COLOR_H_IMPORT_PATH}\"\n")
+        file.write("\n")
+
         file.write(f"#define {include_once_name}_HEIGHT {height}\n")
         file.write(f"#define {include_once_name}_WIDTH {width}\n")
+        file.write(f"#define EMPTY_COLOR {{.r = 0, .g = 0, .b = 0, .a = 0}}\n")
+        file.write(f"#define EMPTY_SET {{0, 0, 0}}\n")
         file.write("\n")
 
         for _, (name, _) in enumerate(input_matrix.items()):
             file.write(f"extern const int {include_once_name}_" +
-                       f"{name.upper()}[{height}][{width}];\n\n")
+                       f"{name.upper()}[{height}][{width}][3];\n")
+            file.write("\n")
+            file.write(f"extern const Color {include_once_name}_COLORED_" +
+                       f"{name.upper()}[{height}][{width}];\n")
+            file.write("\n")
 
         file.write("#endif")
 
@@ -82,12 +95,58 @@ def write_c_file(input_matrix, height, width):
 
         for _, (name, matrix) in enumerate(input_matrix.items()):
             file.write(f"const int {include_once_name}_" +
+                       f"{name.upper()}[{height}][{width}][3] = {{\n")
+
+            for row in matrix:
+                string_to_write = ""
+
+                for column in row:
+                    if column[3] != 0:
+                        r = column[0]
+                        g = column[1]
+                        b = column[2]
+
+                        if r:
+                            r = "true"
+                        else:
+                            r = "false"
+                        if g:
+                            g = "true"
+                        else:
+                            g = "false"
+                        if b:
+                            b = "true"
+                        else:
+                            b = "false"
+
+                        color_pair = f"{{{r}, {g}, {b}}}, "
+                    else:
+                        color_pair = "EMPTY_SET, "
+                    string_to_write += color_pair
+
+                file.write("\t{" + string_to_write + "},\n")
+
+            file.write("};\n")
+            file.write("\n")
+
+            file.write(f"const Color {include_once_name}_COLORED_" +
                        f"{name.upper()}[{height}][{width}] = {{\n")
 
             for row in matrix:
-                file.write("\t{" + ", ".join(map(str, row)) + "},\n")
+                string_to_write = ""
 
-            file.write("};\n\n")
+                for column in row:
+                    if column[3] != 0:
+                        color_pair = (f"{{.r = {column[0]}, " +
+                                      f".g = {column[1]}, .b = {column[2]}, .a = {column[3]}}}, ")
+                    else:
+                        color_pair = "EMPTY_COLOR, "
+                    string_to_write += color_pair
+
+                file.write("\t{" + string_to_write + "},\n")
+
+            file.write("};\n")
+            file.write("\n")
 
 
 def write_output_file(input_matrix, height, width):
