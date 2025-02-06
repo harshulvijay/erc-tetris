@@ -17,3 +17,8 @@ void wait(int time_in_ms)
   usleep(time_in_ms);
 #endif
 }
+
+bool is_between_inclusive(int num, int ll, int ul)
+{
+  return num >= ll && num <= ul;
+}

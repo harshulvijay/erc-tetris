@@ -12,4 +12,6 @@ typedef unsigned int uint;
 // function(s) dependent on platform-specific functions
 void wait(int time_in_ms);
 
+bool is_between_inclusive(int num, int ll, int ul);
+
 #endif

@@ -2,7 +2,7 @@
 
 void clear_display(Display *display)
 {
-  struct Color black = use_color(0, 0, 0);
+  struct Color black = use_color(0, 0, 0, 255);
 
   clear_display_with_color(display, black);
 }

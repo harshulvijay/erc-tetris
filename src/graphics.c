@@ -25,7 +25,7 @@ uint64_t get_current_time_ms()
 #endif
 }
 
-void init_graphics_loop(Display *display)
+void init_graphics_loop(Display *display, ESPConnection *connections)
 {
   int frame_number = 0;
   double start_time = get_current_time_ms();
@@ -47,6 +47,7 @@ void init_graphics_loop(Display *display)
       };
 
       update_graphics(display, &frame_metadata);
+      send_matrix(display, connections);
       frame_number++;
     }
 
