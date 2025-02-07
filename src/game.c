@@ -112,47 +112,47 @@ void game_tick(Display *display)
     current_color_index = 0;
   }
 
-  // if (!GAME_STATE.displays_set_up)
-  // {
-  //   setup_displays(&GAME_STATE, display);
-  // }
+  if (!GAME_STATE.displays_set_up)
+  {
+    setup_displays(&GAME_STATE, display);
+  }
 
-  // if (GAME_STATE.game_over)
-  // {
-  //   start_game(&GAME_STATE);
-  // }
-  // else
-  // {
-  //   parse_input(&GAME_STATE);
+  if (GAME_STATE.game_over)
+  {
+    start_game(&GAME_STATE);
+  }
+  else
+  {
+    parse_input(&GAME_STATE);
 
-  //   if (!GAME_STATE.initialized)
-  //   {
-  //     init_game(&GAME_STATE);
-  //     spawn_tetromino(&GAME_STATE);
-  //   }
-  //   else
-  //   {
-  //     int move_result = move_tetromino(&GAME_STATE, 0, 1);
+    if (!GAME_STATE.initialized)
+    {
+      init_game(&GAME_STATE);
+      spawn_tetromino(&GAME_STATE);
+    }
+    else
+    {
+      int move_result = move_tetromino(&GAME_STATE, 0, 1);
 
-  //     if (move_result == OUT_OF_BOUNDS_ROW || move_result == COLLISION_ROW)
-  //     {
+      if (move_result == OUT_OF_BOUNDS_ROW || move_result == COLLISION_ROW)
+      {
 
-  //       lock_tetromino(&GAME_STATE);
-  //       if (is_game_over(&GAME_STATE, move_result))
-  //       {
-  //         // the piece is colliding an already exisiting piece
-  //         // so the game is over
-  //         on_game_over(&GAME_STATE);
-  //       }
-  //       else
-  //       {
-  //         spawn_tetromino(&GAME_STATE);
-  //       }
-  //     }
+        lock_tetromino(&GAME_STATE);
+        if (is_game_over(&GAME_STATE, move_result))
+        {
+          // the piece is colliding an already exisiting piece
+          // so the game is over
+          on_game_over(&GAME_STATE);
+        }
+        else
+        {
+          spawn_tetromino(&GAME_STATE);
+        }
+      }
 
-  //     clear_lines(&GAME_STATE);
-  //   }
+      clear_lines(&GAME_STATE);
+    }
 
-  //   sync_display(&GAME_STATE);
-  // }
+    sync_display(&GAME_STATE);
+  }
 }
