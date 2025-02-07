@@ -10,7 +10,7 @@ NON_ALPHANUMERIC_CHARS = {
     '/': 'slash',
     '\\': 'backslash',
     '|': 'pipe',
-    '?': 'q',       # question
+    '?': 'question',       # question
     '*': 'asterisk',
     '(': 'lparen',  # left parenthesis
     ')': 'rparen',  # right parenthesis

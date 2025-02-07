@@ -103,14 +103,16 @@ Color COLORS_X[] = {
 
 void game_tick(Display *display)
 {
-  Color color = COLORS_X[current_color_index];
-  clear_display_with_color(display, color);
-  current_color_index++;
+  // scroll_text(display);
 
-  if (current_color_index >= 11)
-  {
-    current_color_index = 0;
-  }
+  // Color color = COLORS_X[current_color_index];
+  // clear_display_with_color(display, color);
+  // current_color_index++;
+
+  // if (current_color_index >= 11)
+  // {
+  //   current_color_index = 0;
+  // }
 
   if (!GAME_STATE.displays_set_up)
   {

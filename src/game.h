@@ -5,6 +5,7 @@
 #include "app/gen/tetrominoes.h"
 #include "app/gen/text.h"
 #include "display.h"
+#include "char.h"
 #include "gtk.h"
 #include "util.h"
 #include <malloc.h>

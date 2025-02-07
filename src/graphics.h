@@ -21,7 +21,7 @@ typedef struct
 } FrameMetadata;
 
 // FPS the game loop will run at
-#define TARGET_FPS 0.20
+#define TARGET_FPS 5
 #define TARGET_FRAME_TIME (1000.0 / TARGET_FPS)
 
 void init_graphics_loop(Display *display, ESPConnection *connections);

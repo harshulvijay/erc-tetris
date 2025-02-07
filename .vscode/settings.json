@@ -5,6 +5,8 @@
     "stdbool.h": "c",
     "graphics.h": "c",
     "game.h": "c",
-    "gtk.h": "c"
+    "gtk.h": "c",
+    "char.h": "c",
+    "text.h": "c"
   }
 }
